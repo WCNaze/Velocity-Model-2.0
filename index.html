@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, height=device-height">
+	<title>Animate</title>
+	<link rel="stylesheet" href="./index.css">
+</head>
+<body>
+	<img hidden class="logo" id="Logo" src="Marketing_A_Plus_Logo.png">
+	<div style="position:relative;">
+		<canvas id="graph" style="z-index: -1;"></canvas>
+		<canvas id="ball" style="position:absolute;left: 0;top: 0;z-index: 0;"></canvas>
+		<canvas id="A+" style="position:absolute;left: 0;top: 0;z-index: 1;"></canvas>
+	</div>
+	<p></p>
+	<div class="grid-container" style="position:relative;">
+		<div class="grid-item">
+			<div>
+			<div class="text-background">Ball X Velocity: <input type="text" name="ballxvalue" id="bxval"></div>
+			</div>
+		</div>
+		<div class="grid-item">
+			<div class="text-background">Ball Y Velocity: <input type="text" name="ballyvalue" id="byval"></div>
+		</div>
+		<div class="grid-button">
+			<button class="btn" onclick="AnimateBtn()">Start</button>
+		</div>
+		<div class="grid-item">
+			<div class="text-background">Thrower X Velocity: <input type="text" name="Throwerxvalue" id="txval"></div>
+		</div>
+		<div class="grid-item">
+			<div class="text-background">Thrower Y Velocity: <input type="text" name="Throweryvalue" id="tyval"></div>
+		</div>
+
+	</div>
+<script type="text/javascript" src="canvas.js">
+</script>
+</body>
+</html>
