@@ -3,6 +3,7 @@ var xveli = 0
 var yveli = 0
 console.log(loaded)
 
+
 //Button toggle
 	var clicked = 1
 	var btn = document.querySelector(".btn");
