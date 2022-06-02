@@ -1,4 +1,6 @@
 var loaded = 0
+var xveli = 0
+var yveli = 0
 console.log(loaded)
 
 //Button toggle
@@ -17,6 +19,39 @@ console.log(loaded)
 			btn.classList.add("circle");
 			btn.innerHTML = "X";
 			clicked= clicked*-1;
+			bxvalin = document.getElementById("bxval").value
+			console.log(`first x: ${bxvalin}`)
+			bxvalin = bxvalin.replace(/[^0-9.-]/gi,'')
+			console.log(`After replace x: ${bxvalin}`)
+			if (bxvalin == ''){
+				bxvalin = 0
+				console.log(`inside If`)
+			}
+			xveli = parseInt(bxvalin)
+			console.log(`after Int parse x: ${xveli}`)
+			if (xveli > 10 || xveli < -10){
+				if (xveli >0){
+					xveli = 10
+				} else {
+					xveli = -10
+				}
+			}
+			document.getElementById("bxval").value = xveli
+			byvalin = document.getElementById("byval").value
+			byvalin = byvalin.replace(/[^0-9.-]/gi,'')
+			if (byvalin == ''){
+				byvalin = 0
+			}
+			yveli = parseInt(byvalin)
+			if (yveli > 10 || yveli < -10){
+				if (yveli >0){
+					yveli = 10
+				} else {
+					yveli = -10
+				}
+			}
+			document.getElementById("byval").value = yveli
+			yveli = yveli * -1
 			ctx2.clearRect(0,0,canvas2.width,canvas2.height);
 			createball();
 		} else if (clicked == -1) {
@@ -117,9 +152,9 @@ baseball()
 }
 
 //ball velocity
-var xveli = 10;
+//var xveli = 10;
 var xvel = xveli;
-var yveli = -5;
+//var yveli = -5;
 var yvel = yveli;
 
 var ballid;
@@ -137,7 +172,7 @@ function createball(){
 	ctx2.stroke();
 	xvel += xveli;
 	yvel += yveli;
-	console.log(loaded)
+//	console.log(loaded)
 }
 
 //Layer 2
