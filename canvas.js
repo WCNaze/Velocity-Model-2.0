@@ -1,6 +1,8 @@
-var loaded = 0
-var xveli = 0
-var yveli = 0
+var loaded = 0;
+var xveli = 0;
+var yveli = 0;
+var txveli = 0;
+var tyveli = 0;
 console.log(loaded)
 
 //Button toggle
@@ -52,6 +54,40 @@ console.log(loaded)
 			}
 			document.getElementById("byval").value = yveli
 			yveli = yveli * -1
+			//thrower
+			txvalin = document.getElementById("txval").value
+			console.log(`first x: ${txvalin}`)
+			txvalin = txvalin.replace(/[^0-9.-]/gi,'')
+			console.log(`After replace x: ${txvalin}`)
+			if (txvalin == ''){
+				txvalin = 0
+				console.log(`inside If`)
+			}
+			txveli = parseInt(txvalin)
+			console.log(`after Int parse x: ${txveli}`)
+			if (txveli > 10 || txveli < -10){
+				if (txveli >0){
+					txveli = 10
+				} else {
+					txveli = -10
+				}
+			}
+			document.getElementById("txval").value = txveli
+			tyvalin = document.getElementById("tyval").value
+			tyvalin = tyvalin.replace(/[^0-9.-]/gi,'')
+			if (tyvalin == ''){
+				tyvalin = 0
+			}
+			tyveli = parseInt(tyvalin)
+			if (tyveli > 10 || tyveli < -10){
+				if (tyveli >0){
+					tyveli = 10
+				} else {
+					tyveli = -10
+				}
+			}
+			document.getElementById("tyval").value = tyveli
+			tyveli = tyveli * -1
 			ctx2.clearRect(0,0,canvas2.width,canvas2.height);
 			createball();
 		} else if (clicked == -1) {
@@ -61,9 +97,11 @@ console.log(loaded)
 			clicked= clicked*-1;
 			cancelAnimationFrame(ballid)
 			ctx2.clearRect(0,0,canvas2.width,canvas2.height);
-			xvel = 0
-			yvel = 0
-			baseball()
+			xvel = 0;
+			yvel = 0;
+			txvel = 0;
+			tyvel = 0;
+			baseball();
 		}
 	}
 
@@ -152,10 +190,10 @@ baseball()
 }
 
 //ball velocity
-//var xveli = 10;
 var xvel = xveli;
-//var yveli = -5;
 var yvel = yveli;
+var txvel = txveli;
+var tyvel = tyveli;
 
 var ballid;
 
@@ -164,7 +202,7 @@ function createball(){
 	ballid = requestAnimationFrame(createball);
 	ctx2.clearRect(0,0,canvas2.width,canvas2.height);
 	ctx2.beginPath();
-	ctx2.arc(cw * 0.5 + xvel, ch * 0.5 + yvel, 15, 0, Math.PI * 2, false);
+	ctx2.arc(cw * 0.5 + xvel + txvel, ch * 0.5 + yvel + tyvel, 15, 0, Math.PI * 2, false);
 	ctx2.fillStyle = "red";
 	ctx2.fill();
 	ctx2.lineWidth = "2";
@@ -172,6 +210,8 @@ function createball(){
 	ctx2.stroke();
 	xvel += xveli;
 	yvel += yveli;
+	txvel += txveli;
+	tyvel += tyveli;
 //	console.log(loaded)
 }
 
