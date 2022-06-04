@@ -113,7 +113,7 @@ console.log(loaded)
 
 //canvas background
 var canvas = document.getElementById("graph");
-var ch = window.innerHeight*.80
+var ch = window.innerHeight*.75
 var cw = window.innerWidth - 20
 var img = document.getElementById("Logo")
 console.log(canvas);
