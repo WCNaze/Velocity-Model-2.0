@@ -5,8 +5,6 @@ var txveli = 0;
 var tyveli = 0;
 console.log(loaded)
 
-
-
 //Button toggle
 	var clicked = 1
 	var btn = document.querySelector(".btn");
@@ -23,41 +21,40 @@ console.log(loaded)
 			btn.classList.add("circle");
 			btn.innerHTML = "X";
 			clicked= clicked*-1;
-			//ball input
-			bxvalin = document.getElementById("bxval").value;
-			console.log(`first x: ${bxvalin}`);
-			bxvalin = bxvalin.replace(/[^0-9.-]/gi,'');
-			console.log(`After replace x: ${bxvalin}`);
+			bxvalin = document.getElementById("bxval").value
+			console.log(`first x: ${bxvalin}`)
+			bxvalin = bxvalin.replace(/[^0-9.-]/gi,'')
+			console.log(`After replace x: ${bxvalin}`)
 			if (bxvalin == ''){
 				bxvalin = 0
 				console.log(`inside If`)
-			};
-			xveli = parseInt(bxvalin);
-			console.log(`after Int parse x: ${xveli}`);
+			}
+			xveli = parseInt(bxvalin)
+			console.log(`after Int parse x: ${xveli}`)
 			if (xveli > 10 || xveli < -10){
 				if (xveli >0){
 					xveli = 10
 				} else {
 					xveli = -10
-				};
-			};
-			document.getElementById("bxval").value = xveli;
-			byvalin = document.getElementById("byval").value;
-			byvalin = byvalin.replace(/[^0-9.-]/gi,'');
+				}
+			}
+			document.getElementById("bxval").value = xveli
+			byvalin = document.getElementById("byval").value
+			byvalin = byvalin.replace(/[^0-9.-]/gi,'')
 			if (byvalin == ''){
 				byvalin = 0
-			};
-			yveli = parseInt(byvalin);
+			}
+			yveli = parseInt(byvalin)
 			if (yveli > 10 || yveli < -10){
 				if (yveli >0){
 					yveli = 10
 				} else {
 					yveli = -10
-				};
-			};
-			document.getElementById("byval").value = yveli;
-			yveli = yveli * -1;
-			//thrower input
+				}
+			}
+			document.getElementById("byval").value = yveli
+			yveli = yveli * -1
+			//thrower
 			txvalin = document.getElementById("txval").value
 			console.log(`first x: ${txvalin}`)
 			txvalin = txvalin.replace(/[^0-9.-]/gi,'')
@@ -100,11 +97,11 @@ console.log(loaded)
 			clicked= clicked*-1;
 			cancelAnimationFrame(ballid)
 			ctx2.clearRect(0,0,canvas2.width,canvas2.height);
-			xvel = 0
-			yvel = 0
-			txvel = 0
-			tyvel = 0
-			baseball()
+			xvel = 0;
+			yvel = 0;
+			txvel = 0;
+			tyvel = 0;
+			baseball();
 		}
 	}
 
@@ -179,6 +176,15 @@ var ctx2 = canvas2.getContext('2d');
 
 //ball
 function baseball(){
+	//thrower
+	ctx2.beginPath();
+	ctx2.arc(cw * 0.5, ch * 0.5, 15, 0, Math.PI * 2, false);
+	ctx2.fillStyle = "blue";
+	ctx2.fill();
+	ctx2.lineWidth = "2";
+	ctx2.strokeStyle = "darkblue";
+	ctx2.stroke();
+	//ball
 	ctx2.beginPath();
 	ctx2.arc(cw * 0.5, ch * 0.5, 15, 0, Math.PI * 2, false);
 	ctx2.fillStyle = "red";
@@ -193,7 +199,6 @@ baseball()
 }
 
 //ball velocity
-
 var xvel = xveli;
 var yvel = yveli;
 var txvel = txveli;
@@ -205,10 +210,28 @@ var ballid;
 function createball(){
 	ballid = requestAnimationFrame(createball);
 	ctx2.clearRect(0,0,canvas2.width,canvas2.height);
+	//pos
+	var txpos = cw * 0.5 + txvel;
+	var typos = ch * 0.5 + tyvel;
+	var bxpos = cw * 0.5 + xvel + txvel;
+	var bypos = ch * 0.5 + yvel + tyvel;
+	//distance line
 	ctx2.beginPath();
-	xpos = cw * 0.5 + xvel +txvel
-	ypos = ch * 0.5 + yvel + tyvel
-	ctx2.arc( xpos, ypos, 15, 0, Math.PI * 2, false);
+	ctx2.moveTo(bxpos,bypos);
+	ctx2.lineTo(txpos,typos);
+	ctx2.strokeStyle = "rgba(255,255,0,.8)";
+	ctx2.stroke();
+	//thrower
+	ctx2.beginPath();
+	ctx2.arc(txpos, typos, 15, 0, Math.PI * 2, false);
+	ctx2.fillStyle = "blue";
+	ctx2.fill();
+	ctx2.lineWidth = "2";
+	ctx2.strokeStyle = "darkblue";
+	ctx2.stroke();
+	//ball
+	ctx2.beginPath();
+	ctx2.arc(bxpos, bypos, 15, 0, Math.PI * 2, false);
 	ctx2.fillStyle = "red";
 	ctx2.fill();
 	ctx2.lineWidth = "2";
@@ -218,23 +241,40 @@ function createball(){
 	yvel += yveli;
 	txvel += txveli;
 	tyvel += tyveli;
-	if (xpos > cw || xpos < 0 || ypos > ch || ypos <0){
-		cancelAnimationFrame(ballid)
-		console.log(`x final:${xpos},y final:${ypos}`)
-		for (let k=0; k<5;k++){
+	if (bxpos > cw || bxpos < 0 || bypos > ch || bypos < 0 || txpos > cw || txpos <0 || typos > ch || typos <0) {
+		cancelAnimationFrame(ballid);
+		for (let i = 0; i < 5; i++){
+			//thrower
 			ctx2.beginPath();
-			xshadow = cw*0.5 + -1*k*(cw*0.5-xpos)/5;
-			yshadow = ch*0.5 + -1*k*(ch*0.5-ypos)/5;
-			console.log(`xshadow:${xshadow} yshadow:${yshadow}`)
-			ctx2.arc(xshadow,yshadow,15,0,Math.PI*2,false);
-			ctx2.fillStyle = 'rgba(255,0,0,.25)';
+			var txshadow = cw * 0.5 + -1*i*(cw * 0.5 - txpos)/5;
+			var tyshadow = ch * 0.5 + -1*i*(ch * 0.5 - typos)/5;
+			console.log(`txshadow :${txshadow} tyshadow:${tyshadow}`)
+			ctx2.arc(txshadow, tyshadow, 15, 0, Math.PI * 2, false);
+			ctx2.fillStyle = "rgba(0,0,255,.25)";
 			ctx2.fill();
 			ctx2.lineWidth = "2";
-			ctx2.strokeStyle = 'rgba(255,0,0,.5)';
+			ctx2.strokeStyle = "rgba(0,0,255,.5)";
+			ctx2.stroke();
+			//ball
+			ctx2.beginPath();
+			var bxshadow = cw * 0.5 + -1*i*(cw * 0.5 - bxpos)/5;
+			var byshadow = ch * 0.5 + -1*i*(ch * 0.5 - bypos)/5;
+			console.log(`bxshadow :${bxshadow} byshadow:${byshadow}`)
+			ctx2.arc(bxshadow, byshadow, 15, 0, Math.PI * 2, false);
+			ctx2.fillStyle = "rgba(255,0,0,.25)";
+			ctx2.fill();
+			ctx2.lineWidth = "2";
+			ctx2.strokeStyle = "rgba(255,0,0,.5)";
+			ctx2.stroke();
+			//distance line
+			ctx2.beginPath();
+			ctx2.moveTo(bxshadow,byshadow);
+			ctx2.lineTo(txshadow,tyshadow);
+			ctx2.strokeStyle = "rgba(255,255,0,.25)";
 			ctx2.stroke();
 		}
-		console.log("cancel")
-	};
+	}
+
 //	console.log(loaded)
 }
 
