@@ -5,6 +5,7 @@ var txveli = 0;
 var tyveli = 0;
 console.log(loaded)
 
+
 //Button toggle
 	var clicked = 1
 	var btn = document.querySelector(".btn");
