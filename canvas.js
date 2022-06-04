@@ -165,10 +165,6 @@ ctx.stroke();
 //Layer 1
 
 var canvas2 = document.getElementById("ball");
-/*var ch = window.innerHeight*.80
-var cw = window.innerWidth - 20
-var img = document.getElementById("Logo")
-*/
 console.log(canvas2);
 canvas2.width= cw;
 canvas2.height= ch;
@@ -282,11 +278,6 @@ function createball(){
 //Layer 2
 
 var canvas3 = document.getElementById("A+");
-/*
-var ch = window.innerHeight*.80
-var cw = window.innerWidth - 20
-var img = document.getElementById("Logo")
-*/
 console.log(canvas3);
 canvas3.width= cw;
 canvas3.height= ch;
