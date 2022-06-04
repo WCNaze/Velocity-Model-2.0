@@ -210,10 +210,19 @@ var ballid;
 function createball(){
 	ballid = requestAnimationFrame(createball);
 	ctx2.clearRect(0,0,canvas2.width,canvas2.height);
-	ctx2.beginPath();
-	//thrower
+	//pos
 	var txpos = cw * 0.5 + txvel;
 	var typos = ch * 0.5 + tyvel;
+	var bxpos = cw * 0.5 + xvel + txvel;
+	var bypos = ch * 0.5 + yvel + tyvel;
+	//distance line
+	ctx2.beginPath();
+	ctx2.moveTo(bxpos,bypos);
+	ctx2.lineTo(txpos,typos);
+	ctx2.strokeStyle = "rgba(255,255,0,.8)";
+	ctx2.stroke();
+	//thrower
+	ctx2.beginPath();
 	ctx2.arc(txpos, typos, 15, 0, Math.PI * 2, false);
 	ctx2.fillStyle = "blue";
 	ctx2.fill();
@@ -222,8 +231,6 @@ function createball(){
 	ctx2.stroke();
 	//ball
 	ctx2.beginPath();
-	var bxpos = cw * 0.5 + xvel + txvel;
-	var bypos = ch * 0.5 + yvel + tyvel;
 	ctx2.arc(bxpos, bypos, 15, 0, Math.PI * 2, false);
 	ctx2.fillStyle = "red";
 	ctx2.fill();
@@ -234,19 +241,19 @@ function createball(){
 	yvel += yveli;
 	txvel += txveli;
 	tyvel += tyveli;
-	if (bxpos > cw || bxpos < 0 || bypos > ch || bypos < 0) {
+	if (bxpos > cw || bxpos < 0 || bypos > ch || bypos < 0 || txpos > cw || txpos <0 || typos > ch || typos <0) {
 		cancelAnimationFrame(ballid);
 		for (let i = 0; i < 5; i++){
 			//thrower
 			ctx2.beginPath();
-			var bxshadow = cw * 0.5 + -1*i*(cw * 0.5 - txpos)/5;
-			var byshadow = ch * 0.5 + -1*i*(ch * 0.5 - typos)/5;
-			console.log(`txshadow :${bxshadow} tyshadow:${byshadow}`)
-			ctx2.arc(bxshadow, byshadow, 15, 0, Math.PI * 2, false);
-			ctx2.fillStyle = "rgba(0,0,255,.25";
+			var txshadow = cw * 0.5 + -1*i*(cw * 0.5 - txpos)/5;
+			var tyshadow = ch * 0.5 + -1*i*(ch * 0.5 - typos)/5;
+			console.log(`txshadow :${txshadow} tyshadow:${tyshadow}`)
+			ctx2.arc(txshadow, tyshadow, 15, 0, Math.PI * 2, false);
+			ctx2.fillStyle = "rgba(0,0,255,.25)";
 			ctx2.fill();
 			ctx2.lineWidth = "2";
-			ctx2.strokeStyle = "rgba(0,0,255,.5";
+			ctx2.strokeStyle = "rgba(0,0,255,.5)";
 			ctx2.stroke();
 			//ball
 			ctx2.beginPath();
@@ -254,10 +261,16 @@ function createball(){
 			var byshadow = ch * 0.5 + -1*i*(ch * 0.5 - bypos)/5;
 			console.log(`bxshadow :${bxshadow} byshadow:${byshadow}`)
 			ctx2.arc(bxshadow, byshadow, 15, 0, Math.PI * 2, false);
-			ctx2.fillStyle = "rgba(255,0,0,.25";
+			ctx2.fillStyle = "rgba(255,0,0,.25)";
 			ctx2.fill();
 			ctx2.lineWidth = "2";
-			ctx2.strokeStyle = "rgba(255,0,0,.5";
+			ctx2.strokeStyle = "rgba(255,0,0,.5)";
+			ctx2.stroke();
+			//distance line
+			ctx2.beginPath();
+			ctx2.moveTo(bxshadow,byshadow);
+			ctx2.lineTo(txshadow,tyshadow);
+			ctx2.strokeStyle = "rgba(255,255,0,.25)";
 			ctx2.stroke();
 		}
 	}
