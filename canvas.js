@@ -202,7 +202,9 @@ function createball(){
 	ballid = requestAnimationFrame(createball);
 	ctx2.clearRect(0,0,canvas2.width,canvas2.height);
 	ctx2.beginPath();
-	ctx2.arc(cw * 0.5 + xvel + txvel, ch * 0.5 + yvel + tyvel, 15, 0, Math.PI * 2, false);
+	var bxpos = cw * 0.5 + xvel + txvel;
+	var bypos = ch * 0.5 + yvel + tyvel;
+	ctx2.arc(bxpos, bypos, 15, 0, Math.PI * 2, false);
 	ctx2.fillStyle = "red";
 	ctx2.fill();
 	ctx2.lineWidth = "2";
@@ -212,6 +214,22 @@ function createball(){
 	yvel += yveli;
 	txvel += txveli;
 	tyvel += tyveli;
+	if (bxpos > cw || bxpos < 0 || bypos > ch || bypos < 0) {
+		cancelAnimationFrame(ballid);
+		for (let i = 0; i < 5; i++){
+			var bxshadow = cw * 0.5 + -1*i*(cw * 0.5 - bxpos)/5;
+			var byshadow = ch * 0.5 + -1*i*(ch * 0.5 - bypos)/5;
+			console.log(`bxshadow :${bxshadow} byshadow:${byshadow}`)
+			ctx2.beginPath();
+			ctx2.arc(bxshadow, byshadow, 15, 0, Math.PI * 2, false);
+			ctx2.fillStyle = "rgba(255,0,0,.25";
+			ctx2.fill();
+			ctx2.lineWidth = "2";
+			ctx2.strokeStyle = "rgba(255,0,0,.5";
+			ctx2.stroke();
+		}
+	}
+
 //	console.log(loaded)
 }
 
