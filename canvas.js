@@ -93,8 +93,7 @@ console.log(loaded)
 			createball();
 		} else if (clicked == -1) {
 			btn.classList.remove("circle");
-			const myTimeout = setTimeout(inner("Start"),1000)
-			/*btn.innerHTML = "Start";*/
+			const myTimeout = setTimeout(inner,500,"Start");
 			clicked= clicked*-1;
 			cancelAnimationFrame(ballid)
 			ctx2.clearRect(0,0,canvas2.width,canvas2.height);
@@ -272,7 +271,6 @@ function createball(){
 		}
 	}
 
-//	console.log(loaded)
 }
 
 //Layer 2
