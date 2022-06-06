@@ -33,7 +33,7 @@ console.log(loaded)
 			console.log(`first x: ${bxvalin}`)
 			bxvalin = bxvalin.replace(/[^0-9.-]/gi,'')
 			console.log(`After replace x: ${bxvalin}`)
-			if (bxvalin == ''){
+			if (bxvalin == '' || isNaN(parseInt(bxvalin))){
 				bxvalin = 0
 				console.log(`inside If`)
 			}
@@ -49,7 +49,7 @@ console.log(loaded)
 			document.getElementById("bxval").value = xveli
 			byvalin = document.getElementById("byval").value
 			byvalin = byvalin.replace(/[^0-9.-]/gi,'')
-			if (byvalin == ''){
+			if (byvalin == '' || isNaN(parseInt(byvalin))){
 				byvalin = 0
 			}
 			yveli = parseInt(byvalin)
@@ -67,7 +67,7 @@ console.log(loaded)
 			console.log(`first x: ${txvalin}`)
 			txvalin = txvalin.replace(/[^0-9.-]/gi,'')
 			console.log(`After replace x: ${txvalin}`)
-			if (txvalin == ''){
+			if (txvalin == '' || isNaN(parseInt(txvalin))){
 				txvalin = 0
 				console.log(`inside If`)
 			}
@@ -83,7 +83,7 @@ console.log(loaded)
 			document.getElementById("txval").value = txveli
 			tyvalin = document.getElementById("tyval").value
 			tyvalin = tyvalin.replace(/[^0-9.-]/gi,'')
-			if (tyvalin == ''){
+			if (tyvalin == '' || isNaN(parseInt(tyvalin))){
 				tyvalin = 0
 			}
 			tyveli = parseInt(tyvalin)
