@@ -18,10 +18,16 @@ input[type=text]{
 
 input[type=text]:focus{
 	width: 40%;
-	border-radius: 3px;
-	border: 3px solid red;
-	background-color: lightpink;
+}
 
+.ball_input:focus{
+	background-color: lightpink;
+	border: 3px solid red;
+}
+
+.thrower_input:focus{
+	background-color: lightblue;
+	border: 3px solid blue;
 }
 
 .logo {
