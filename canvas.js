@@ -11,8 +11,15 @@ console.log(loaded)
 	var btn = document.querySelector(".btn");
 
 	function inner(x){
-		var string = x.toString()
-		btn.innerHTML = string
+//		console.log(`btn.innerHTML:${btn.innerHTML}`)
+//		console.log(`btn classList:${btn.classList}`)
+		if (btn.innerHTML == "X" && btn.classList.contains("circle")== false){
+			var string = x.toString();
+			btn.innerHTML = string;
+//			console.log(`did the thing string:${string}`)
+//			console.log(`btn classList:${btn.classList}`)
+//			console.log(`btn classList.contains(circle):${btn.classList.contains("circle")}`)
+		}
 	}
 
 	function AnimateBtn(){
@@ -93,7 +100,9 @@ console.log(loaded)
 			createball();
 		} else if (clicked == -1) {
 			btn.classList.remove("circle");
-			const myTimeout = setTimeout(inner,500,"Start");
+			if(btn.innerHTML != "Start"){
+				const myTimeout = setTimeout(inner,500,"Start");
+			};
 			clicked= clicked*-1;
 			cancelAnimationFrame(ballid)
 			ctx2.clearRect(0,0,canvas2.width,canvas2.height);
