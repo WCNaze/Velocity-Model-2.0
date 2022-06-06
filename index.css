@@ -31,12 +31,12 @@ input[type=text]:focus{
 
 .grid-container {
 	display: grid;
-	grid-template-columns: 20% 20% 20%;
+	grid-template-columns: 25% 25% 25%;
 	justify-content: center;
 	align-content: center;
 	align-items: center;
 	align-content: center;
-	gap: 20px 20px;
+	gap: 15px 20px;
 }
 
 .grid-item {
