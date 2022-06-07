@@ -3,6 +3,10 @@ var xveli = 0;
 var yveli = 0;
 var txveli = 0;
 var tyveli = 0;
+var idle = 0;
+var zeroed = 0;
+var zerosTO = -1;
+var idleTO = -1;
 console.log(loaded)
 
 
@@ -20,8 +24,8 @@ console.log(loaded)
 //			console.log(`btn classList:${btn.classList}`)
 //			console.log(`btn classList.contains(circle):${btn.classList.contains("circle")}`)
 		}
-	}
-
+	};
+	
 	function AnimateBtn(){
 		var loaded = 1
 		console.log(loaded)
@@ -29,49 +33,49 @@ console.log(loaded)
 			btn.classList.add("circle");
 			btn.innerHTML = "X";
 			clicked= clicked*-1;
-			bxvalin = document.getElementById("bxval").value
-			console.log(`first x: ${bxvalin}`)
-			bxvalin = bxvalin.replace(/[^0-9.-]/gi,'')
-			console.log(`After replace x: ${bxvalin}`)
+			bxvalin = document.getElementById("bxval").value;
+			console.log(`first x: ${bxvalin}`);
+			bxvalin = bxvalin.replace(/[^0-9.-]/gi,'');
+			console.log(`After replace x: ${bxvalin}`);
 			if (bxvalin == '' || isNaN(parseInt(bxvalin))){
 				bxvalin = 0
 				console.log(`inside If`)
-			}
-			xveli = parseInt(bxvalin)
-			console.log(`after Int parse x: ${xveli}`)
+			};
+			xveli = parseInt(bxvalin);
+			console.log(`after Int parse x: ${xveli}`);
 			if (xveli > 10 || xveli < -10){
 				if (xveli >0){
 					xveli = 10
 				} else {
 					xveli = -10
 				}
-			}
-			document.getElementById("bxval").value = xveli
-			byvalin = document.getElementById("byval").value
-			byvalin = byvalin.replace(/[^0-9.-]/gi,'')
+			};
+			document.getElementById("bxval").value = xveli;
+			byvalin = document.getElementById("byval").value;
+			byvalin = byvalin.replace(/[^0-9.-]/gi,'');
 			if (byvalin == '' || isNaN(parseInt(byvalin))){
 				byvalin = 0
-			}
-			yveli = parseInt(byvalin)
+			};
+			yveli = parseInt(byvalin);
 			if (yveli > 10 || yveli < -10){
 				if (yveli >0){
 					yveli = 10
 				} else {
 					yveli = -10
 				}
-			}
-			document.getElementById("byval").value = yveli
-			yveli = yveli * -1
+			};
+			document.getElementById("byval").value = yveli;
+			yveli = yveli * -1;
 			//thrower
-			txvalin = document.getElementById("txval").value
-			console.log(`first x: ${txvalin}`)
-			txvalin = txvalin.replace(/[^0-9.-]/gi,'')
-			console.log(`After replace x: ${txvalin}`)
+			txvalin = document.getElementById("txval").value;
+			console.log(`first x: ${txvalin}`);
+			txvalin = txvalin.replace(/[^0-9.-]/gi,'');
+			console.log(`After replace x: ${txvalin}`);
 			if (txvalin == '' || isNaN(parseInt(txvalin))){
 				txvalin = 0
 				console.log(`inside If`)
-			}
-			txveli = parseInt(txvalin)
+			};
+			txveli = parseInt(txvalin);
 			console.log(`after Int parse x: ${txveli}`)
 			if (txveli > 10 || txveli < -10){
 				if (txveli >0){
@@ -79,13 +83,13 @@ console.log(loaded)
 				} else {
 					txveli = -10
 				}
-			}
-			document.getElementById("txval").value = txveli
-			tyvalin = document.getElementById("tyval").value
-			tyvalin = tyvalin.replace(/[^0-9.-]/gi,'')
+			};
+			document.getElementById("txval").value = txveli;
+			tyvalin = document.getElementById("tyval").value;
+			tyvalin = tyvalin.replace(/[^0-9.-]/gi,'');
 			if (tyvalin == '' || isNaN(parseInt(tyvalin))){
 				tyvalin = 0
-			}
+			};
 			tyveli = parseInt(tyvalin)
 			if (tyveli > 10 || tyveli < -10){
 				if (tyveli >0){
@@ -93,12 +97,30 @@ console.log(loaded)
 				} else {
 					tyveli = -10
 				}
-			}
-			document.getElementById("tyval").value = tyveli
-			tyveli = tyveli * -1
+			};
+			document.getElementById("tyval").value = tyveli;
+			tyveli = tyveli * -1;
 			ctx2.clearRect(0,0,canvas2.width,canvas2.height);
 			createball();
+			if (xveli == 0 && yveli == 0 && txveli == 0 && tyveli == 0 && zeroed == 0){
+				zeroed = 1;
+				zerosTO = setTimeout(AnimateBtn,10000);
+				console.log(`first call:${zerosTO}`)
+			} else if ((xveli != 0 || yveli != 0 || txveli != 0 || tyveli != 0 ) && idle == 0){
+				idle = 1;
+				idleTO = setTimeout(AnimateBtn,60000);
+				console.log(`idleTO active:${idleTO}`)
+			};
 		} else if (clicked == -1) {
+			if(zeroed == 1){
+				zeroed = 0;
+				console.log(`second call:${zerosTO}`)
+				clearTimeout(zerosTO)
+			} else if (idle ==1){
+				idle = 0;
+				console.log(`idleTO clicked:${idleTO}`)
+				clearTimeout(idleTO)
+			}
 			btn.classList.remove("circle");
 			if(btn.innerHTML != "Start"){
 				const myTimeout = setTimeout(inner,500,"Start");
@@ -112,7 +134,7 @@ console.log(loaded)
 			tyvel = 0;
 			baseball();
 		}
-	}
+	};
 
 
 
