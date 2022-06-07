@@ -7,7 +7,46 @@ var idle = 0;
 var zeroed = 0;
 var zerosTO = -1;
 var idleTO = -1;
+var bshadows = [];
+var tshadows = [];
 console.log(loaded)
+//event listener to get the closest shadow's information
+document.addEventListener('click', (event) => {
+	const rect = canvas2.getBoundingClientRect();
+	const x = event.clientX - rect.left;
+	const y = event.clientY - rect.top;
+	var bdist = [];
+	var tdist = [];
+	if (event.clientX > rect.left && event.clientX < rect.right && event.clientY > rect.top && event.clientY < rect.bottom){
+		console.log(`x:${x} y:${y}\neventX:${event.clientX} eventY:${event.clientY}\nrect.left:${rect.left} rect.top:${rect.top}\nrect.right:${rect.right} rect.bottom:${rect.bottom}`);
+		if (bshadows.length >0){
+			console.log(true);
+			for (let i = 0; i < bshadows.length; i++){
+				let dist = ((x - bshadows[i].x)**2 + (y - bshadows[i].y)**2)**.5
+				bdist.push(dist)
+			}
+			//console.log(bdist);
+			console.log(Math.min(...bdist));
+			console.log(bdist.indexOf(Math.min(...bdist)));
+			for (let i = 0; i < tshadows.length; i++){
+				let dist = ((x - tshadows[i].x)**2 + (y - tshadows[i].y)**2)**.5
+				tdist.push(dist)
+			}
+			//console.log(tdist);
+			console.log(Math.min(...tdist));
+			console.log(tdist.indexOf(Math.min(...tdist)));
+			if (Math.min(...bdist) < Math.min(...tdist)){
+				console.log(bshadows[bdist.indexOf(Math.min(...bdist))]);
+			} else if (Math.min(...tdist) < Math.min(...bdist)){
+				console.log(tshadows[tdist.indexOf(Math.min(...tdist))]);
+			} else {
+				console.log(bshadows[bdist.indexOf(Math.min(...bdist))]);
+			};
+		} else {
+			console.log(false)
+		}
+	}
+});
 
 
 //Button toggle
@@ -108,10 +147,12 @@ console.log(loaded)
 				console.log(`first call:${zerosTO}`)
 			} else if ((xveli != 0 || yveli != 0 || txveli != 0 || tyveli != 0 ) && idle == 0){
 				idle = 1;
-				idleTO = setTimeout(AnimateBtn,60000);
+				idleTO = setTimeout(AnimateBtn,300000);
 				console.log(`idleTO active:${idleTO}`)
 			};
 		} else if (clicked == -1) {
+			bshadows = [];
+			tshadows = [];
 			if(zeroed == 1){
 				zeroed = 0;
 				console.log(`second call:${zerosTO}`)
@@ -132,6 +173,7 @@ console.log(loaded)
 			yvel = 0;
 			txvel = 0;
 			tyvel = 0;
+			//console.log(document.getEventListeners())
 			baseball();
 		}
 	};
@@ -282,6 +324,14 @@ function createball(){
 			ctx2.lineWidth = "2";
 			ctx2.strokeStyle = "rgba(0,0,255,.5)";
 			ctx2.stroke();
+			let tshadow = {
+				"id":"t"+i,
+				"x":txshadow,
+				"y":tyshadow,
+				"x_vel":txveli,
+				"y_vel":tyveli
+			}
+			tshadows.push(tshadow)
 			//ball
 			ctx2.beginPath();
 			var bxshadow = cw * 0.5 + -1*i*(cw * 0.5 - bxpos)/5;
@@ -293,6 +343,14 @@ function createball(){
 			ctx2.lineWidth = "2";
 			ctx2.strokeStyle = "rgba(255,0,0,.5)";
 			ctx2.stroke();
+			let bshadow = {
+				"id":"b"+i,
+				"x":bxshadow,
+				"y":byshadow,
+				"x_vel":xveli,
+				"y_vel":yveli
+			}
+			bshadows.push(bshadow)
 			//distance line
 			ctx2.beginPath();
 			ctx2.moveTo(bxshadow,byshadow);
@@ -300,6 +358,25 @@ function createball(){
 			ctx2.strokeStyle = "rgba(255,255,0,.25)";
 			ctx2.stroke();
 		}
+	//adding final shadows
+	let bshadow = {
+		"id":"b"+bshadows.length,
+		"x":bxpos,
+		"y":bypos,
+		"x_vel":xveli,
+		"y_vel":yveli
+	};
+	let tshadow = {
+		"id":"t"+tshadows.length,
+		"x":txpos,
+		"y":typos,
+		"x_vel":txveli,
+		"y_vel":tyveli
+	};
+	bshadows.push(bshadow);
+	tshadows.push(tshadow);
+	console.log(bshadows);
+	console.log(tshadows);
 	}
 
 }
