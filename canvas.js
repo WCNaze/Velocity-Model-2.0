@@ -55,104 +55,13 @@ document.addEventListener('click', (event) => {
 			if (Math.min(...bdist) < Math.min(...tdist)){
 				console.log(bshadows[bdist.indexOf(Math.min(...bdist))]);
 				index = bdist.indexOf(Math.min(...bdist));
-				console.log(bshadows[index].x)
-				//X Vector
-				ctx4.beginPath();
-				ctx4.moveTo(bshadows[index].x,bshadows[index].y);
-				ctx4.lineTo(bshadows[index].x + 10*bshadows[index].x_vel,bshadows[index].y);
-				ctx4.lineWidth = "3";
-				ctx4.strokeStyle = "#e75480";//Dark Pink
-				ctx4.stroke();
-				//Y Vector
-				ctx4.beginPath();
-				ctx4.moveTo(bshadows[index].x,bshadows[index].y);
-				ctx4.lineTo(bshadows[index].x,bshadows[index].y + 10*bshadows[index].y_vel);
-				ctx4.lineWidth = "3";
-				ctx4.strokeStyle = "#5b92e5";//United Nations Blue
-				ctx4.stroke();
-				//Total Vector
-				ctx4.beginPath();
-				ctx4.moveTo(bshadows[index].x,bshadows[index].y);
-				ctx4.lineTo(bshadows[index].x + 10*bshadows[index].x_vel,bshadows[index].y + 10*bshadows[index].y_vel);
-				ctx4.lineWidth = "3";
-				ctx4.strokeStyle = "#df73ff";
-				ctx4.stroke();
-				//Ball Shadow highlight
-				ctx4.beginPath();
-				ctx4.arc(bshadows[index].x, bshadows[index].y, 15, 0, Math.PI * 2, false);
-				ctx4.fillStyle = "orange";
-				ctx4.fill();
-				ctx4.lineWidth = "2";
-				ctx4.strokeStyle = "darkred";
-				ctx4.stroke();
-				//Rect
-				let width = 230;
-				let height = 75;
-				let startx = cw - width -10;
-				let starty = ch - height -10;
-				let radius = 20;
-				let offset = 4;
-				ctx4.fillStyle = "darkslategrey";
-				ctx4.roundRect(startx+offset,starty+offset,width,height,radius).fill()
-				ctx4.fillStyle = "lightgrey";
-				ctx4.strokeStyle = "darkgrey";
-				ctx4.roundRect(startx,starty,width,height,radius).fill();
-				ctx4.roundRect(startx,starty,width,height,radius).stroke();
-				//Output X Vel
-				ctx4.font = "15px Arial";
-				ctx4.fillStyle = "black";
-				ctx4.textAlign = "left";
-				ctx4.fillText(`Total X Velocity: ${bshadows[index].x_vel} = `,cw-width+10,ch-height+10,125)
-				ctx4.fillStyle = "red";
-				ctx4.textAlign = "left";
-				ctx4.fillText(`${bshadows[index].x_veli} `,cw-width+10+125,ch-height+10,20);
-				ctx4.fillStyle = "black";
-				ctx4.textAlign = "left";
-				ctx4.fillText(`+ `,cw-width+10+125+20,ch-height+10,15);
-				ctx4.fillStyle = "blue";
-				ctx4.textAlign = "left";
-				ctx4.fillText(`${bshadows[index].x_vel - bshadows[index].x_veli}`,cw-width+10+125+35,ch-height+10,20);
-				//Output Y Vel
-				ctx4.font = "15px Arial";
-				ctx4.fillStyle = "black";
-				ctx4.textAlign = "left";
-				ctx4.fillText(`Total Y Velocity: ${-1*bshadows[index].y_vel} = `,cw-width+10,ch-height+10+20,125)
-				ctx4.fillStyle = "red";
-				ctx4.textAlign = "left";
-				ctx4.fillText(`${-1*bshadows[index].y_veli} `,cw-width+10+125,ch-height+10+20,20);
-				ctx4.fillStyle = "black";
-				ctx4.textAlign = "left";
-				ctx4.fillText(`+ `,cw-width+10+125+20,ch-height+10+20,15);
-				ctx4.fillStyle = "blue";
-				ctx4.textAlign = "left";
-				ctx4.fillText(`${-1*(bshadows[index].y_vel - bshadows[index].y_veli)}`,cw-width+10+125+35,ch-height+10+20,20);
-				//Output Total
-				ctx4.font = "15px Arial";
-				ctx4.fillStyle = "black";
-				ctx4.textAlign = "left";
-				ctx4.fillText(`Total Speed: ${(Math.round((10*((bshadows[index].y_vel)**2 + (bshadows[index].x_vel)**2)**.5)))/10} =   `,cw-width+10,ch-height+10+45,125)
-				ctx4.fillStyle = "#e75480";//Dark Pink
-				ctx4.textAlign = "left";
-				ctx4.fillText(`${bshadows[index].x_vel}^2 `,cw-width+10+130,ch-height+10+45,25);
-				ctx4.fillStyle = "black";
-				ctx4.textAlign = "left";
-				ctx4.fillText(`+ `,cw-width+10+130+25,ch-height+10+45,10);
-				ctx4.fillStyle = "#5b92e5";//United Nations Blue
-				ctx4.textAlign = "left";
-				ctx4.fillText(`${-1*(bshadows[index].y_vel)}^2`,cw-width+10+130+35,ch-height+10+45,25);
-				//Square Root
-				ctx4.beginPath();
-				ctx4.moveTo(cw-width+10+117,ch-height+10+45-7);
-				ctx4.lineTo(cw-width+10+119,ch-height+10+45-10);
-				ctx4.lineTo(cw-width+10+123,ch-height+10+45);
-				ctx4.lineTo(cw-width+10+123,ch-height+10+45-15);
-				ctx4.lineTo(cw-width+10+130+60,ch-height+10+45-15);
-				ctx4.lineWidth = "1";
-				ctx4.strokeStyle = "black";
-				ctx4.stroke();
+				console.log(bshadows[index].x);
+				highlight(index,"b");
 
 			} else if (Math.min(...tdist) < Math.min(...bdist)){
 				console.log(tshadows[tdist.indexOf(Math.min(...tdist))]);
+				index = tdist.indexOf(Math.min(...tdist));
+				highlight(index,"t");
 			} else {
 				console.log(bshadows[bdist.indexOf(Math.min(...bdist))]);
 			};
@@ -161,6 +70,132 @@ document.addEventListener('click', (event) => {
 		}
 	}
 });
+
+//Highlight and Display
+function highlight(index,type){
+	//Colors and set reference
+	if (type == "b"){
+		var xcolor = "#e75480";//Dark Pink
+		var ycolor = "#5b92e5";//United Nations Blue
+		var totalcolor = "#df73ff";//Heliotrope
+		var color1 = "red";//Ball Velocity
+		var color2 = "blue";//Thrower Velocity
+		var shadows = bshadows;
+	} else if (type == "t"){
+		var xcolor = "#800000";//Maroon
+		var ycolor = "#191970";//Midnight Blue
+		var totalcolor = "#663399";//Rebecca Purple
+		var color1 = "blue";//Thrower Velocity
+		var color2 = "red";//Ball Contribution
+		var shadows = tshadows;
+	};
+	//X Vector
+	ctx4.beginPath();
+	ctx4.moveTo(shadows[index].x,shadows[index].y);
+	ctx4.lineTo(shadows[index].x + 10*shadows[index].x_vel,shadows[index].y);
+	ctx4.lineWidth = "3";
+	ctx4.strokeStyle = xcolor;
+	ctx4.stroke();
+	//Y Vector
+	ctx4.beginPath();
+	ctx4.moveTo(shadows[index].x + 10*shadows[index].x_vel,shadows[index].y);
+	ctx4.lineTo(shadows[index].x + 10*shadows[index].x_vel,shadows[index].y + 10*shadows[index].y_vel);
+	ctx4.lineWidth = "3";
+	ctx4.strokeStyle = ycolor;
+	ctx4.stroke();
+	//Total Vector
+	ctx4.beginPath();
+	ctx4.moveTo(shadows[index].x,shadows[index].y);
+	ctx4.lineTo(shadows[index].x + 10*shadows[index].x_vel,shadows[index].y + 10*shadows[index].y_vel);
+	ctx4.lineWidth = "3";
+	ctx4.strokeStyle = totalcolor;
+	ctx4.stroke();
+	//Ball Shadow highlight
+	if (type == "b"){
+		ctx4.beginPath();
+		ctx4.arc(shadows[index].x, shadows[index].y, 15, 0, Math.PI * 2, false);
+		ctx4.fillStyle = "orange";
+		ctx4.fill();
+		ctx4.lineWidth = "2";
+		ctx4.strokeStyle = "darkred";
+		ctx4.stroke();
+	} else if (type == "t"){
+		ctx4.beginPath();
+		ctx4.arc(shadows[index].x, shadows[index].y, 15, 0, Math.PI * 2, false);
+		ctx4.fillStyle = "green";
+		ctx4.fill();
+		ctx4.lineWidth = "2";
+		ctx4.strokeStyle = "darkblue";
+		ctx4.stroke();
+	};
+	//Rect
+	let width = 230;
+	let height = 75;
+	let startx = cw - width -10;
+	let starty = ch - height -10;
+	let radius = 20;
+	let offset = 4;
+	ctx4.fillStyle = "darkslategrey";
+	ctx4.roundRect(startx+offset,starty+offset,width,height,radius).fill()
+	ctx4.fillStyle = "lightgrey";
+	ctx4.strokeStyle = "darkgrey";
+	ctx4.roundRect(startx,starty,width,height,radius).fill();
+	ctx4.roundRect(startx,starty,width,height,radius).stroke();
+	//Output X Vel
+	ctx4.font = "15px Arial";
+	ctx4.fillStyle = "black";
+	ctx4.textAlign = "left";
+	ctx4.fillText(`Total X Velocity: ${shadows[index].x_vel} = `,cw-width+10,ch-height+10,125)
+	ctx4.fillStyle = color1;
+	ctx4.textAlign = "left";
+	ctx4.fillText(`${shadows[index].x_veli} `,cw-width+10+125,ch-height+10,20);
+	ctx4.fillStyle = "black";
+	ctx4.textAlign = "left";
+	ctx4.fillText(`+ `,cw-width+10+125+20,ch-height+10,15);
+	ctx4.fillStyle = color2;
+	ctx4.textAlign = "left";
+	ctx4.fillText(`${shadows[index].x_vel - shadows[index].x_veli}`,cw-width+10+125+35,ch-height+10,20);
+	//Output Y Vel
+	ctx4.font = "15px Arial";
+	ctx4.fillStyle = "black";
+	ctx4.textAlign = "left";
+	ctx4.fillText(`Total Y Velocity: ${-1*shadows[index].y_vel} = `,cw-width+10,ch-height+10+20,125)
+	ctx4.fillStyle = color1;
+	ctx4.textAlign = "left";
+	ctx4.fillText(`${-1*shadows[index].y_veli} `,cw-width+10+125,ch-height+10+20,20);
+	ctx4.fillStyle = "black";
+	ctx4.textAlign = "left";
+	ctx4.fillText(`+ `,cw-width+10+125+20,ch-height+10+20,15);
+	ctx4.fillStyle = color2;
+	ctx4.textAlign = "left";
+	ctx4.fillText(`${-1*(shadows[index].y_vel - shadows[index].y_veli)}`,cw-width+10+125+35,ch-height+10+20,20);
+	//Output Total
+	ctx4.font = "15px Arial";
+	ctx4.fillStyle = "black";
+	ctx4.textAlign = "left";
+	ctx4.fillText(`Total Speed: ${(Math.round((10*((shadows[index].y_vel)**2 + (shadows[index].x_vel)**2)**.5)))/10} =   `,cw-width+10,ch-height+10+45,125)
+	ctx4.fillStyle = xcolor;//Color Depends
+	ctx4.textAlign = "left";
+	ctx4.fillText(`${shadows[index].x_vel}^2 `,cw-width+10+130,ch-height+10+45,25);
+	ctx4.fillStyle = "black";
+	ctx4.textAlign = "left";
+	ctx4.fillText(`+ `,cw-width+10+130+25,ch-height+10+45,10);
+	ctx4.fillStyle = ycolor;//Color Depends
+	ctx4.textAlign = "left";
+	ctx4.fillText(`${-1*(shadows[index].y_vel)}^2`,cw-width+10+130+35,ch-height+10+45,25);
+	//Square Root
+	ctx4.beginPath();
+	ctx4.moveTo(cw-width+10+117,ch-height+10+45-7);
+	ctx4.lineTo(cw-width+10+119,ch-height+10+45-10);
+	ctx4.lineTo(cw-width+10+123,ch-height+10+45);
+	ctx4.lineTo(cw-width+10+123,ch-height+10+45-15);
+	ctx4.lineTo(cw-width+10+130+60,ch-height+10+45-15);
+	ctx4.lineWidth = "1";
+	ctx4.strokeStyle = "black";
+	ctx4.stroke();
+}
+
+
 
 
 //Button toggle
