@@ -37,33 +37,33 @@ document.addEventListener('click', (event) => {
 	if (event.clientX > rect.left && event.clientX < rect.right && event.clientY > rect.top && event.clientY < rect.bottom){
 		console.log(`x:${x} y:${y}\neventX:${event.clientX} eventY:${event.clientY}\nrect.left:${rect.left} rect.top:${rect.top}\nrect.right:${rect.right} rect.bottom:${rect.bottom}`);
 		if (bshadows.length >0){
-			console.log(true);
+			//console.log(true);
 			for (let i = 0; i < bshadows.length; i++){
 				let dist = ((x - bshadows[i].x)**2 + (y - bshadows[i].y)**2)**.5
 				bdist.push(dist)
 			}
 			//console.log(bdist);
-			console.log(Math.min(...bdist));
-			console.log(bdist.indexOf(Math.min(...bdist)));
+			//console.log(Math.min(...bdist));
+			//console.log(bdist.indexOf(Math.min(...bdist)));
 			for (let i = 0; i < tshadows.length; i++){
 				let dist = ((x - tshadows[i].x)**2 + (y - tshadows[i].y)**2)**.5
 				tdist.push(dist)
 			}
 			//console.log(tdist);
-			console.log(Math.min(...tdist));
-			console.log(tdist.indexOf(Math.min(...tdist)));
+			//console.log(Math.min(...tdist));
+			//console.log(tdist.indexOf(Math.min(...tdist)));
 			if (Math.min(...bdist) < Math.min(...tdist)){
-				console.log(bshadows[bdist.indexOf(Math.min(...bdist))]);
+				//console.log(bshadows[bdist.indexOf(Math.min(...bdist))]);
 				index = bdist.indexOf(Math.min(...bdist));
-				console.log(bshadows[index].x);
+				//console.log(bshadows[index].x);
 				highlight(index,"b");
 
 			} else if (Math.min(...tdist) < Math.min(...bdist)){
-				console.log(tshadows[tdist.indexOf(Math.min(...tdist))]);
+				//console.log(tshadows[tdist.indexOf(Math.min(...tdist))]);
 				index = tdist.indexOf(Math.min(...tdist));
 				highlight(index,"t");
 			} else {
-				console.log(bshadows[bdist.indexOf(Math.min(...bdist))]);
+				//console.log(bshadows[bdist.indexOf(Math.min(...bdist))]);
 				index1 = bdist.indexOf(Math.min(...bdist));
 				highlight(index1,"b");
 				index2 = tdist.indexOf(Math.min(...tdist));
@@ -226,21 +226,21 @@ function display(shadows,color1,color2,xcolor,ycolor,xshift,yshift,index){
 	
 	function AnimateBtn(){
 		var loaded = 1
-		console.log(loaded)
+		//console.log(loaded)
 		if (clicked == 1) {
 			btn.classList.add("circle");
 			btn.innerHTML = "X";
 			clicked= clicked*-1;
 			bxvalin = document.getElementById("bxval").value;
-			console.log(`first x: ${bxvalin}`);
+			//console.log(`first x: ${bxvalin}`);
 			bxvalin = bxvalin.replace(/[^0-9.-]/gi,'');
-			console.log(`After replace x: ${bxvalin}`);
+			//console.log(`After replace x: ${bxvalin}`);
 			if (bxvalin == '' || isNaN(parseInt(bxvalin))){
 				bxvalin = 0
-				console.log(`inside If`)
+				//console.log(`inside If`)
 			};
 			xveli = parseInt(bxvalin);
-			console.log(`after Int parse x: ${xveli}`);
+			//console.log(`after Int parse x: ${xveli}`);
 			if (xveli > 10 || xveli < -10){
 				if (xveli >0){
 					xveli = 10
@@ -266,15 +266,15 @@ function display(shadows,color1,color2,xcolor,ycolor,xshift,yshift,index){
 			yveli = yveli * -1;
 			//thrower
 			txvalin = document.getElementById("txval").value;
-			console.log(`first x: ${txvalin}`);
+			//console.log(`first x: ${txvalin}`);
 			txvalin = txvalin.replace(/[^0-9.-]/gi,'');
-			console.log(`After replace x: ${txvalin}`);
+			//console.log(`After replace x: ${txvalin}`);
 			if (txvalin == '' || isNaN(parseInt(txvalin))){
 				txvalin = 0
-				console.log(`inside If`)
+				//console.log(`inside If`)
 			};
 			txveli = parseInt(txvalin);
-			console.log(`after Int parse x: ${txveli}`)
+			//console.log(`after Int parse x: ${txveli}`)
 			if (txveli > 10 || txveli < -10){
 				if (txveli >0){
 					txveli = 10
@@ -303,11 +303,11 @@ function display(shadows,color1,color2,xcolor,ycolor,xshift,yshift,index){
 			if (xveli == 0 && yveli == 0 && txveli == 0 && tyveli == 0 && zeroed == 0){
 				zeroed = 1;
 				zerosTO = setTimeout(AnimateBtn,10000);
-				console.log(`first call:${zerosTO}`)
+				//console.log(`first call:${zerosTO}`)
 			} else if ((xveli != 0 || yveli != 0 || txveli != 0 || tyveli != 0 ) && idle == 0){
 				idle = 1;
 				idleTO = setTimeout(AnimateBtn,300000);
-				console.log(`idleTO active:${idleTO}`)
+				//console.log(`idleTO active:${idleTO}`)
 			};
 		} else if (clicked == -1) {
 			ctx4.clearRect(0,0,canvas4.width,canvas4.height);
@@ -315,11 +315,11 @@ function display(shadows,color1,color2,xcolor,ycolor,xshift,yshift,index){
 			tshadows = [];
 			if(zeroed == 1){
 				zeroed = 0;
-				console.log(`second call:${zerosTO}`)
+				//console.log(`second call:${zerosTO}`)
 				clearTimeout(zerosTO)
 			} else if (idle ==1){
 				idle = 0;
-				console.log(`idleTO clicked:${idleTO}`)
+				//console.log(`idleTO clicked:${idleTO}`)
 				clearTimeout(idleTO)
 			}
 			btn.classList.remove("circle");
