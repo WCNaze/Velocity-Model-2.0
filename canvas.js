@@ -151,6 +151,7 @@ function display(shadows,color1,color2,xcolor,ycolor,xshift,yshift,index){
 	ctx4.roundRect(startx+offset+xshift,starty+offset+yshift,width,height,radius).fill()
 	ctx4.fillStyle = "lightgrey";
 	ctx4.strokeStyle = "darkgrey";
+	ctx4.lineWidth = "2";
 	ctx4.roundRect(startx+xshift,starty+yshift,width,height,radius).fill();
 	ctx4.roundRect(startx+xshift,starty+yshift,width,height,radius).stroke();
 	//Output X Vel
